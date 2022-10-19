@@ -4,12 +4,16 @@ import (
 	"context"
 	"log"
 
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+var client *mongo.Client
+
 func ConnectToMongo(mongoUri string) *mongo.Client {
-	client, err := mongo.NewClient(options.Client().ApplyURI(mongoUri))
+	var err error
+	client, err = mongo.NewClient(options.Client().ApplyURI(mongoUri))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -21,7 +25,7 @@ func ConnectToMongo(mongoUri string) *mongo.Client {
 	return client
 }
 
-func CreateDatabase(client *mongo.Client, databaseName string, collection string) {
+func CreateDatabase(databaseName string, collection string) {
 	ctx := context.Background()
 	db := client.Database(databaseName)
 	err := db.CreateCollection(ctx, collection)
@@ -30,21 +34,37 @@ func CreateDatabase(client *mongo.Client, databaseName string, collection string
 	}
 }
 
-func InsertOneToDb(client *mongo.Client, databaseName string, collection string, data interface{}) {
+func InsertOneToDb(databaseName string, collection string, data interface{}) *mongo.InsertOneResult {
 	ctx := context.Background()
 	db := client.Database(databaseName)
-	_, err := db.Collection(collection).InsertOne(ctx, data)
+	result, err := db.Collection(collection).InsertOne(ctx, data)
 	if err != nil {
 		log.Fatal(err)
 	}
+	return result
 }
 
-func DropDatabase(client *mongo.Client, databaseName string) {
+func DropDatabase(databaseName string) {
 	ctx := context.Background()
 	err := client.Database(databaseName).Drop(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func FindOneFromDb(databaseName string, collection string, filter bson.M) []bson.M {
+	ctx := context.Background()
+	db := client.Database(databaseName)
+	userCollection := db.Collection(collection)
+	fCursor, err := userCollection.Find(ctx, filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var resultOne []bson.M
+	if err = fCursor.All(ctx, &resultOne); err != nil {
+		log.Fatal(err)
+	}
+	return resultOne
 }
 
 /*

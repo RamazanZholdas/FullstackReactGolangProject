@@ -8,7 +8,9 @@ import (
 	"os/signal"
 
 	"github.com/RamazanZholdas/serverForFullstackApp/database"
+	"github.com/RamazanZholdas/serverForFullstackApp/routes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -29,14 +31,15 @@ func main() {
 	client := database.ConnectToMongo(os.Getenv("MONGO_URI"))
 	defer client.Disconnect(ctx)
 
-	database.CreateDatabase(client, os.Getenv("DATABASE_NAME"), os.Getenv("COLLECTION_NAME"))
-	defer database.DropDatabase(client, os.Getenv("DATABASE_NAME"))
+	database.CreateDatabase(os.Getenv("DATABASE_NAME"), os.Getenv("COLLECTION_NAME"))
+	defer database.DropDatabase(os.Getenv("DATABASE_NAME"))
 
 	app := fiber.New()
+	app.Use(cors.New(cors.Config{
+		AllowCredentials: true,
+	}))
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!")
-	})
+	routes.Setup(app)
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
@@ -45,8 +48,6 @@ func main() {
 		fmt.Println("Gracefully shutting down...")
 		_ = app.Shutdown()
 	}()
-
-	// ...
 
 	if err := app.Listen(":8000"); err != nil {
 		log.Panic(err)
