@@ -1,12 +1,10 @@
 import React from 'react';
-import Navbar from './Navbar';
 import Footer from './Footer';
 
 function Contact() {
   return (
     <div>
-      <Navbar />
-      <div className="px-2 flex max-w-screen-lg mx-auto pt-5 items-center flex-col">
+      <div className="px-2 flex max-w-screen-lg mx-auto pt-5 items-center flex-col mb-16">
         <p className="text-green-400 text-3xl font-semibold">
           Get in <span className="text-purple-800">touch</span> with us
         </p>

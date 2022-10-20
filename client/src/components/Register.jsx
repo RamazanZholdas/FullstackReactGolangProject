@@ -1,17 +1,45 @@
 import React from 'react';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [redirect, setRedirect] = useState(false);
+
+  const submit = async (e) => {
+    e.preventDefault();
+
+    await fetch('http://localhost:8000/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
+    });
+
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return <Navigate to="/login" />;
+  }
+
   return (
     <div>
       <div className="flex items-center justify-center h-screen">
         <div className="flex flex-col items-center justify-center bg-white rounded-lg shadow-xl p-6 w-80">
           <h1 className="text-3xl font-bold mb-2">Register</h1>
           <p className="text-gray-500 mb-6">Please register your account</p>
-          <form className="flex flex-col w-full">
+          <form className="flex flex-col w-full" onSubmit={submit}>
             <label htmlFor="email" className="mb-1">
               Email
             </label>
             <input
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
               id="email"
@@ -22,6 +50,7 @@ function Register() {
               Name
             </label>
             <input
+              onChange={(e) => setName(e.target.value)}
               type="text"
               name="name"
               id="name"
@@ -32,6 +61,7 @@ function Register() {
               Password
             </label>
             <input
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
               id="password"

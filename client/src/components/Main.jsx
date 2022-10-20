@@ -1,13 +1,11 @@
 import React from 'react';
 import videoBg from '../assets/r6edit.mp4';
 import Typed from 'react-typed';
-import Navbar from './Navbar';
 import Footer from './Footer';
 
-export default function Main() {
+export default function Main(props) {
   return (
     <div>
-      <Navbar />
       <div>
         <div className="px-2 flex max-w-screen-lg mx-auto pt-5 justify-center items-center">
           <p className="text-4xl text-green-400 font-bold">
@@ -40,13 +38,15 @@ export default function Main() {
               <div className="flex">
                 <div>
                   <h3 className="text-3xl font-bold text-purple-800 mt-3 mb-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, delectus.
+                  Siege is an entry in the Rainbow Six series and the successor to Tom Clancy's Rainbow 6: Patriots
                   </h3>
                   <p className="text-white">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus accusantium
-                    voluptatibus doloremque quasi enim non ducimus natus, est harum accusamus? Lorem
-                    ipsum dolor sit amet consectetur adipisicing elit. Rem commodi deleniti rerum,
-                    odit sint illo labore laudantium quasi cupiditate quidem.
+                  Tom Clancy's Rainbow Six Siege is an online tactical shooter video game developed by 
+                  Ubisoft Montreal and published by Ubisoft. It was released worldwide for Microsoft
+                   Windows, PlayStation 4, and Xbox One on December 1, 2015; the game was also released 
+                   for PlayStation 5 and Xbox Series X and Series S exactly five years later on December 1, 
+                   2020. The title received a port for Google Stadia on June 30, 2021, and one for Amazon 
+                   Luna in January 2022. 
                   </p>
                 </div>
               </div>
@@ -55,13 +55,15 @@ export default function Main() {
               <div className="flex">
                 <div>
                   <h3 className="text-3xl font-bold text-purple-800 mt-3 mb-2">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, delectus.
+                  Tom Clancy's Rainbow Six Siege is a first-person shooter game
                   </h3>
                   <p className="text-white">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus accusantium
-                    voluptatibus doloremque quasi enim non ducimus natus, est harum accusamus?
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, non harum!
-                    Recusandae voluptatem error minima doloribus. Optio quam quasi voluptatum!
+                  Different operators have different nationalities, weapons, and gadgets.
+                   The game features an asymmetrical structure whereby the teams are not always
+                    balanced in their choices of abilities.[4] The base Counter-Terrorism Units (CTUs) 
+                    available for play are the American Hostage Rescue Team (referred to in-game as the FBI SWAT), 
+                    the British SAS, the German GSG-9, the Russian Spetsnaz and the French GIGN, each of which has four operators 
+                    per unit split between attackers and defenders
                   </p>
                 </div>
               </div>
