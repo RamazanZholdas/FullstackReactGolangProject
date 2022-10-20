@@ -1,6 +1,5 @@
 //create navbar
 import React from 'react';
-import Typed from 'react-typed';
 
 const Navbar = () => {
   return (
@@ -24,12 +23,16 @@ const Navbar = () => {
         </a>
       </ul>
       <ul className="inline-flex items-center">
-        <li className="ml-5 bg-transparent hover:bg-green-500 text-green-400 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded">
+        <a
+          href="/login"
+          className="ml-5 bg-transparent hover:bg-green-500 text-green-400 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded">
           Login
-        </li>
-        <li className="ml-5 bg-transparent hover:bg-green-500 text-green-400 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded">
+        </a>
+        <a
+          href="/register"
+          className="ml-5 bg-transparent hover:bg-green-500 text-green-400 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded">
           Register
-        </li>
+        </a>
       </ul>
     </div>
   );
